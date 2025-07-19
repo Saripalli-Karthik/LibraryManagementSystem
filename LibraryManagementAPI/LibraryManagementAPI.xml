@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LibraryManagementAPI</name>
+    </assembly>
+    <members>
+        <member name="M:LibraryManagementAPI.Controllers.BookController.GetAll">
+            <summary>
+            Retrieves all books in the catalog.
+            </summary>
+            <returns>A list of all books.</returns>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BookController.Get(System.Int32)">
+            <summary>
+            Retrieves a specific book by its ID.
+            </summary>
+            <param name="id">The ID of the book to retrieve.</param>
+            <returns>The book if found; otherwise, 404.</returns>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BookController.Create(LibraryManagementAPI.DTOs.BookDto)">
+            <summary>
+            Creates a new book.
+            </summary>
+            <param name="dto">The book data to create.</param>
+            <returns>201 Created if successful; 400 Bad Request if invalid.</returns>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BookController.Update(System.Int32,LibraryManagementAPI.DTOs.BookDto)">
+            <summary>
+            Updates an existing book.
+            </summary>
+            <param name="id">The ID of the book to update.</param>
+            <param name="dto">The updated book data.</param>
+            <returns>204 No Content if successful; 404 Not Found if the book does not exist.</returns>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BookController.Delete(System.Int32)">
+            <summary>
+            Deletes a book by ID.
+            </summary>
+            <param name="id">The ID of the book to delete.</param>
+            <returns>204 No Content if deleted; 400 Bad Request if borrow records exist; 404 if not found.</returns>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BorrowController.Borrow(LibraryManagementAPI.DTOS.BorrowDto)">
+            <summary>
+            Creates a new borrow record (loan).
+            </summary>
+            <param name="dto">Borrow details: BookId and optional UserId (for Admin/Librarian).</param>
+            <returns>201 Created with the new record, or 400 on failure.</returns>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BorrowController.GetById(System.Int32)">
+            <summary>
+            Retrieves any borrow record by ID (Admins/Librarians only).
+            </summary>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BorrowController.Return(LibraryManagementAPI.DTOS.ReturnDto)">
+            <summary>
+            Returns a borrowed book.
+            </summary>
+            <param name="dto">Return details: BorrowId.</param>
+            <returns>204 No Content on success, 400/403/404 on error.</returns>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.BorrowController.GetMyHistory">
+            <summary>
+            Retrieves the current user’s borrow history.
+            </summary>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.FineController.GetFines">
+            <summary>
+            Retrieves fines:
+            - Students see only their fines.
+            - Admin/Librarian see all fines.
+            </summary>
+        </member>
+        <member name="M:LibraryManagementAPI.Controllers.FineController.PayFine(LibraryManagementAPI.DTOS.PayFineDto)">
+            <summary>
+            Pays a specific fine.
+            </summary>
+        </member>
+        <member name="T:LibraryManagementAPI.DTOs.BookDto">
+            <summary>
+            Data needed to create or update a book.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOs.BookDto.Title">
+            <summary>
+            The book’s title.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOs.BookDto.Author">
+            <summary>
+            The book’s author.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOs.BookDto.ISBN">
+            <summary>
+            The ISBN in 978-XXXXXXXXXX format.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOs.BookDto.Publisher">
+            <summary>
+            The name of the publisher.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOs.BookDto.PublishedYear">
+            <summary>
+            Year the book was published.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOs.BookDto.TotalCopies">
+            <summary>
+            Total number of copies available in the library.
+            </summary>
+        </member>
+        <member name="T:LibraryManagementAPI.DTOS.BorrowDto">
+            <summary>
+            Information needed to borrow a book.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.BorrowDto.BookId">
+            <summary>The ID of the book to borrow.</summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.BorrowDto.UserId">
+            <summary>
+            (Admins/Librarians only) The user ID on whose behalf to borrow.
+            </summary>
+        </member>
+        <member name="T:LibraryManagementAPI.DTOS.LoginDto">
+            <summary>
+            Credentials used to obtain a JWT token.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.LoginDto.Email">
+            <summary>
+            The user’s email address.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.LoginDto.Password">
+            <summary>
+            The user’s password.
+            </summary>
+        </member>
+        <member name="T:LibraryManagementAPI.DTOS.PayFineDto">
+            <summary>
+            Information needed to pay a library fine.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.PayFineDto.FineId">
+            <summary>The ID of the fine to pay.</summary>
+        </member>
+        <member name="T:LibraryManagementAPI.DTOS.RegisterDto">
+            <summary>
+            Data required to register a new user account.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.RegisterDto.FullName">
+            <summary>
+            The user’s full name.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.RegisterDto.Email">
+            <summary>
+            The user’s email address (will be their login).
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.RegisterDto.Password">
+            <summary>
+            The user’s password.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.RegisterDto.Role">
+            <summary>
+            The role to assign (e.g. “Student”, “Librarian”, “Admin”).
+            </summary>
+        </member>
+        <member name="T:LibraryManagementAPI.DTOS.ReturnDto">
+            <summary>
+            Information needed to return a borrowed book.
+            </summary>
+        </member>
+        <member name="P:LibraryManagementAPI.DTOS.ReturnDto.BorrowId">
+            <summary>The ID of the borrow record being returned.</summary>
+        </member>
+        <member name="T:LibraryManagementAPI.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:LibraryManagementAPI.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:LibraryManagementAPI.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:LibraryManagementAPI.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:LibraryManagementAPI.Migrations.SeedAndModelUpdates">
+            <inheritdoc />
+        </member>
+        <member name="M:LibraryManagementAPI.Migrations.SeedAndModelUpdates.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:LibraryManagementAPI.Migrations.SeedAndModelUpdates.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:LibraryManagementAPI.Migrations.SeedAndModelUpdates.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
