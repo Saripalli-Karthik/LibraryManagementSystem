@@ -1,5 +1,6 @@
 ﻿using LibraryManagementAPI.Data;
 using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.DTOS;
 using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -83,5 +84,33 @@ namespace LibraryManagementAPI.Services
             await _context.SaveChangesAsync();
             return BookDeleteResult.Success;
         }
+
+        public async Task<PaginatedResult<Book>> SearchBooksAsync(string? keyword, int page, int pageSize)
+        {
+            var query = _context.Books.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                query = query.Where(b =>
+                    b.Title.Contains(keyword) ||
+                    b.Author.Contains(keyword) ||
+                    b.ISBN.Contains(keyword));
+            }
+
+            var totalCount = await query.CountAsync();
+            var items = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedResult<Book>
+            {
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                Items = items
+            };
+        }
+
     }
 }
