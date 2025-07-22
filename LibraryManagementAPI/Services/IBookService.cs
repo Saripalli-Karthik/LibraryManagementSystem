@@ -1,4 +1,5 @@
 ﻿using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.DTOS;
 using LibraryManagementAPI.Models;
 
 namespace LibraryManagementAPI.Services
@@ -10,5 +11,7 @@ namespace LibraryManagementAPI.Services
         Task<Book> CreateBookAsync(BookDto dto);
         Task<bool> UpdateBookAsync(int id, BookDto dto);
         Task<BookDeleteResult> DeleteBookAsync(int id);
+        Task<PaginatedResult<Book>> SearchBooksAsync(string? keyword, int page, int pageSize);
+
     }
 }

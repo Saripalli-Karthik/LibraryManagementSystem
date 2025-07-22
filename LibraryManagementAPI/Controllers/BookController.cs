@@ -95,5 +95,14 @@ namespace LibraryManagementAPI.Controllers
                 _ => NoContent()
             };
         }
+
+        [HttpGet("paged")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetPaged([FromQuery] string? search, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        {
+            var result = await _bookService.SearchBooksAsync(search, page, pageSize);
+            return Ok(result);
+        }
+
     }
 }
